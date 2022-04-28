@@ -1,10 +1,12 @@
 import pytest
 
-from core.data_provider import get_pokemon_details
+from core.data_provider import get_pokemon_details, check_pokemon_ability
 
 testdata = [
     "electrode",
     "exeggcute",
+    "marowak",
+    "koffing",
 ]
 
 
@@ -24,7 +26,8 @@ def test_02_height(pokemon_name):
 
 @pytest.mark.functional
 @pytest.mark.parametrize("pokemon_name", testdata)
-def test_03_ability_imposter(pokemon_name):
-    pass
+def test_03_check_ability_imposter_flag(pokemon_name):
+    assert check_pokemon_ability(pokemon_name, "Imposter"), "Can't find flag Imposter"
+
 
 

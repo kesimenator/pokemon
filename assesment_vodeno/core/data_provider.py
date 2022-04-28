@@ -1,5 +1,7 @@
 import json
 import logging
+import re
+
 import requests
 
 url = 'https://pokeapi.co/api/v2/pokemon?offset=100&limit=100'
@@ -40,6 +42,15 @@ def get_pokemon_details(pokemon=None):
     return json.loads(response.text)
 
 
+def check_pokemon_ability(pokemon_name: str = "", ability_name: str = ""):
+    _abilities = get_pokemon_details(pokemon_name)['abilities']
+    for _ability in _abilities:
+        if re.findall(ability_name.lower(), _ability['ability']['name'].lower()):
+            print(f'{pokemon_name} has Imposter ability')
+            return True
+    return False
+
+
 if __name__ == '__main__':
     pokemon_details = get_pokemon_details("electrode")
     logging.info(pokemon_details['abilities'])
@@ -48,5 +59,8 @@ if __name__ == '__main__':
     an_array = json.loads(response.text)['results']
 
     for ar in an_array:
-        logging.info(ar)
-    # print(pokemon_details['haveAbilityImposter'])
+        _url = ar.__getitem__('url')
+        response = requests.get(_url)
+        el = response.text
+        if el.find("haveAbilityImposter") != -1:
+            logging.info(el)
