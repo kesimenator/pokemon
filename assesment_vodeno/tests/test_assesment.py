@@ -15,6 +15,7 @@ testdata = [
 def test_01_list_of_abilities(pokemon_name):
     _abilities = get_pokemon_details(pokemon_name)['abilities']
     print(_abilities)
+    assert str(_abilities) != "", 'ability should exist'
 
 
 @pytest.mark.functional
@@ -22,6 +23,7 @@ def test_01_list_of_abilities(pokemon_name):
 def test_02_height(pokemon_name):
     _height = get_pokemon_details(pokemon_name)['height']
     print(_height)
+    assert str(_height) != "", 'height should exist'
 
 
 @pytest.mark.functional
