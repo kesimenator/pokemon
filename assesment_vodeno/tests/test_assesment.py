@@ -30,6 +30,3 @@ def test_02_height(pokemon_name):
 @pytest.mark.parametrize("pokemon_name", testdata)
 def test_03_check_ability_imposter_flag(pokemon_name):
     assert check_pokemon_ability(pokemon_name, "Imposter"), "Can't find flag Imposter"
-
-
-
